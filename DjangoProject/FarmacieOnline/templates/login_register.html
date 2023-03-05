@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {% block content %}
-
+{% if page == 'login' %}
     <div>
         <form method="POST" action="">
             {% csrf_token %}
@@ -13,7 +13,19 @@
             {# Numele trebuie sa fie diferit pentru fiecare input? #}
             <input type="submit" value="Login">
         </form>
+        <p>No account?</p>
+        <a href = {% url 'register' %}>Sign up here!</a>
     </div>
-
+{% else %}
+     <div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }} {# OBSERVAM CA AICI E FOLOSITA CHEIA DIN variabila context! #}
+            <p>Signed up aready?</p>
+            <a href="{% url 'login' %}"> Login here!</a>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+{% endif %}
 
 {% endblock %}

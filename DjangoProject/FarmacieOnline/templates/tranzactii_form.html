@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %} <!-- E pentru protectie cibernetica cica -->
+            <a href = "{{request.META.HTTP_REFERER}}"><button>Go Back</button></a>
+            <input type="submit" value="Submit" style="margin:10px" title="Adauga tranzactia!"> <!-- Value reprezinta numele field ului; in cazul nostru numele butonului submit -->
+            {{ form.as_p }}
+        </form>
+    </div>
+{% endblock content %}

@@ -26,8 +26,11 @@
            <th>Pret</th>
            <th>Producator</th>
            <th>Reteta</th>
-           <th>Modificare Medicament</th>
-           <th>Stergere Medicament</th>
+            {% if request.user.is_superuser %}
+                <th>Modificare Medicament</th>
+                <th>Stergere Medicament</th>
+            {% endif %}
+            {# Vrem ca doar adminul sa poata efectua operatii pe CRUD #}
      </tr>
     {% for medicament in medicamente %}
         <tr>
@@ -40,15 +43,19 @@
                             checked
                         {% endif %}>
             </td>
-            <td>
-                <a href="{% url 'update-medicament' medicament.id %}"><button>Update Medicament</button> </a>
-            </td>
-             <td>
-                <a href="{% url 'delete-medicament' medicament.id %}"><button>Delete Medicament</button> </a>
-            </td>
+            {% if request.user.is_superuser %}
+                  <td>
+                     <a href="{% url 'update-medicament' medicament.id %}"><button>Update Medicament</button> </a>
+                  </td>
+                  <td>
+                    <a href="{% url 'delete-medicament' medicament.id %}"><button>Delete Medicament</button> </a>
+                  </td>
+            {% endif %}
         </tr>
     {% endfor %}
 </table>
 </div>
-<a href="{% url 'create-medicament' %}"><button>Create Medicament</button> </a>
+    {% if request.user.is_superuser %}
+        <a href="{% url 'create-medicament' %}"><button>Adauga Medicament</button> </a>
+    {% endif %}
 {% endblock %}

@@ -25,7 +25,7 @@ class Tranzactie(models.Model):
     medicament = models.ForeignKey(Medicament, on_delete=models.CASCADE)
     client = models.ForeignKey(User, on_delete=models.CASCADE)
     numar_bucati = models.IntegerField()
-    data_tranzactie = models.DateTimeField(default=django.utils.timezone.now)
+    data_tranzactie = models.DateTimeField(auto_now_add=django.utils.timezone.now)
 
     def __str__(self):
         return f'Tranzactie facuta de clientul de id {self.client}, ' \

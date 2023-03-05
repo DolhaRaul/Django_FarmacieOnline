@@ -1,0 +1,52 @@
+{% extends "main.html" %}
+{% load static %}
+ {% block css %}
+            <link rel="stylesheet" href="{% static 'medicamentePage.css' %}">
+     {% endblock %}
+{% block content %}
+    <span><strong>Tranzactii pentru user ul logat acum: {{ request.user.username }}</strong> </span>
+
+<ul id = "parent">
+    <li class="child">
+    <form class="child" method="GET" action="" title="Filtreaza tranzactiile ce contin textul introdus...">
+        <input type="text" name="q" placeholder="Cauta tranzactii...">
+    </form>
+    </li>
+    <li class="child">
+         <form class="child" action="{% url 'tranzactii' %}">
+         <button type="submit">Refresh</button>
+         </form>
+    </li>
+</ul>
+
+<div class="container">
+<table>
+     <tr>
+           <th>Nume medicament</th>
+           <th>Username</th>
+           <th>Cantitate</th>
+           <th>Data tranzactie</th>
+           <th>Modificare Tranzactie</th>
+           <th>Stergere Tranzactie</th>
+            {# Doar userii sa poata efectua operatii pe CRUD #}
+     </tr>
+    {% for tranzactie in tranzactii %}
+        <tr>
+            <td>{{ tranzactie.medicament.nume }} </td>
+            <td>{{ tranzactie.client.username }}</td>
+            <td>{{ tranzactie.numar_bucati }}</td>
+            <td>{{ tranzactie.data_tranzactie }}</td>
+            <td>
+                 <a href="{% url 'update-tranzactie' tranzactie.id %}"><button>Update tranzactie</button></a>
+            </td>
+            <td>
+                 <a href="{% url 'delete-tranzactie' tranzactie.id %}"><button>Delete tranzactie</button></a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+    <div>
+        <a href="{% url 'create-tranzactie' request.user.id %}"><button size="large">Creeaza tranzactie</button> </a>
+    </div>
+{% endblock %}

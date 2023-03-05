@@ -1,0 +1,62 @@
+{% extends "main.html" %}
+{% load static %}
+ {% block css %}
+            <link rel="stylesheet" href="{% static 'medicamentePage.css' %}">
+     {% endblock %}
+{% block content %}
+    <span><strong>Clienti disponibili</strong> </span>
+
+<ul id = "parent">
+    <li class="child">
+    <form class="child" method="GET" action="" title="Filtreaza clientii ce contin textul introdus...">
+        <input type="text" name="q" placeholder="Cauta clienti...">
+    </form>
+    </li>
+    <li class="child">
+         <form class="child" action="{% url 'clienti' %}">
+         <button type="submit">Refresh</button>
+         </form>
+    </li>
+</ul>
+
+<div class="container">
+<table>
+     <tr>
+           <th>Prenume</th>
+           <th>Nume</th>
+           <th>Email</th>
+           <th>Status</th>
+            {% if request.user.is_superuser %}
+                <th>Modificare Client</th>
+                <th>Stergere Client</th>
+            {% endif %}
+            {# Vrem ca doar adminul sa poata efectua operatii pe CRUD #}
+     </tr>
+    {% for user in clienti %}
+        <tr>
+            <td>{{ user.first_name }} </td>{# ATENTIE LA NUMELE CAMPURILOR!!!; VEZI CLASA ADMIN! #}
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td style="text-decoration:underline">
+            {% if user.is_staff %} {# Aflam statutul clientului(admin sau nu) #}
+                <strong>ADMIN</strong>
+                {% else %}
+                <strong>CLIENT</strong>
+            {% endif %}
+            </td>
+            {% if request.user.is_superuser %}
+                  <td>
+                     <a href="{% url 'update-client' user.id %}"><button>Update Client</button> </a>
+                  </td>
+                  <td>
+                     <a href="{% url 'delete-client' user.id %}"><button>Delete client</button> </a>
+                  </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+</div>
+    {% if request.user.is_superuser %}
+        <a href="{% url 'create-client' %}"><button>Adauga Client</button></a>
+    {% endif %}
+{% endblock %}
