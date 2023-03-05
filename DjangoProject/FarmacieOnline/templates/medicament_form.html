@@ -1,0 +1,11 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <div>
+        <form method="POST" action="">
+            {% csrf_token %} <!-- E pentru protectie cibernetica cica -->
+            <input type="submit" value="Submit" style="margin:10px" title="Adauga medicamentul!"> <!-- Value reprezinta numele field ului; in cazul nostru numele butonului submit -->
+            {{ form.as_p }}
+        </form>
+    </div>
+{% endblock content %}

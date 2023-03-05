@@ -1,0 +1,68 @@
+{% extends "main.html" %}
+{% load static %}
+<!-- Daca folosim extend, TREBUIE SA AVEM DEFINIM BLOCK URI, pt ca daca nu pagina VA fi tot cea
+ data de main.html, unde nimic nu va fi inlocuit;; daca avem blockuri, acestea vor fi inlocuie in navbar.html
+ de catre blocurile din home.html, continutul lor va fi inlocuit(ca un fel de POLIMORFISM)
+ OBS!!! Daca avem block content si in navbar.html, EL VA FI INLOCUIT(tot ce e in el) si aici!-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     {% block css %}
+            <link rel="stylesheet" href="{% static 'homePage.css' %}">
+     {% endblock %}
+    {% block content %}
+    <meta charset="UTF-8">
+    <h1>Farmacie Raul</h1>
+    <div style="display: block">
+        <ul style="display: block;">
+            <li style="float:left;display: block"><p class="button" style="display: block">STATUS:</p></li>
+            <li style="float: left;display: block">
+                <p class = "button">
+                    {% if request.user.is_superuser %}
+                        ADMIN
+                    {% elif request.user.is_authenticated %}
+                        Client
+                    {% else %}
+                        Vizitator
+                    {% endif %}
+                </p>
+            </li>
+        </ul>
+     </div>
+<div class="home-container" style="bottom:20px">
+    <div style="display: block; bottom: 20px">
+        <hr>
+        <h3>Domenii de Interes</h3>
+        <hr>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td style="font-family: Verdana,serif"><a href = "{% url 'medicamente' %}" title="Sau apasa pe acest link">Medicamente</a></td>
+                <td><a href = "{% url 'medicamente' %}"><button>Da click aici pentru a vedea lista de medicamente!</button></a></td>
+            </tr>
+            <tr>
+                <td><a href = "{% url 'medicamente' %}" title="Sau apasa pe acest link">Clienti inregistrati</a></td>
+                <td><a href = "{% url 'medicamente' %}"><button>Da click aici pentru a vedea lista de clienti!</button></a></td>
+            </tr>
+            <tr>
+                <td><a href = "{% url 'medicamente' %}" title="Sau apasa pe acest link">Tranzactii</a></td>
+                <td><a href = "{% url 'medicamente' %}"><button>Da click aici pentru a vedea lisat de tranzactii!</button></a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+        {% comment %}
+    {% for medicament in meds %}
+        <div>
+
+            <h5>{{ medicament.id }} -- <a href="{% url 'medicament' medicament.id %}">{{ medicament.nume }}</a></h5>
+        </div>
+    {% endfor %}
+    {% endcomment %}
+    {% endblock  %}
+</head>
+<body>
+
+</body>
+</html>

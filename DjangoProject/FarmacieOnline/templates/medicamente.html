@@ -1,0 +1,54 @@
+{% extends "main.html" %}
+{% load static %}
+ {% block css %}
+            <link rel="stylesheet" href="{% static 'medicamentePage.css' %}">
+     {% endblock %}
+{% block content %}
+    <span><strong>Medicamente disponibile</strong> </span>
+
+<ul id = "parent">
+    <li class="child">
+    <form class="child" method="GET" action="" title="Filtreaza medicamentele ce contin textul introdus...">
+        <input type="text" name="q" placeholder="Cauta medicamente...">
+    </form>
+    </li>
+    <li class="child">
+         <form class="child" action="{% url 'medicamente' %}">
+         <button type="submit">Refresh</button>
+         </form>
+    </li>
+</ul>
+
+<div class="container">
+<table>
+     <tr>
+           <th>Nume</th>
+           <th>Pret</th>
+           <th>Producator</th>
+           <th>Reteta</th>
+           <th>Modificare Medicament</th>
+           <th>Stergere Medicament</th>
+     </tr>
+    {% for medicament in medicamente %}
+        <tr>
+            <td>{{ medicament.nume }} </td>
+            <td>{{ medicament.pret }}</td>
+            <td>{{ medicament.producator }}</td>
+            <td>
+               <input class="form-check-input" type="checkbox" disabled
+                       {% if medicament.necesita_reteta %}
+                            checked
+                        {% endif %}>
+            </td>
+            <td>
+                <a href="{% url 'update-medicament' medicament.id %}"><button>Update Medicament</button> </a>
+            </td>
+             <td>
+                <a href="{% url 'delete-medicament' medicament.id %}"><button>Delete Medicament</button> </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+<a href="{% url 'create-medicament' %}"><button>Create Medicament</button> </a>
+{% endblock %}

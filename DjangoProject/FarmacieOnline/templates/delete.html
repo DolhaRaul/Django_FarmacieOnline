@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <p>Esti sigur ca vrei sa stergi {{ obj }}?</p>
+        <!--Acel "obj" este un parametru generic; poate reprezenta orice tip de obiect(Medicament, CLient, etc); vedem dua -->
+        <a href = "{{request.META.HTTP_REFERER}}">Go Back</a>
+        <!-- CU aceasta instructiune, mergem la pagina anterioara-->
+        <input type="submit" value="Confirm">
+    </form>
+{% endblock %}
