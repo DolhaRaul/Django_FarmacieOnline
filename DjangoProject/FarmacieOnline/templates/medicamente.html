@@ -45,10 +45,10 @@
             </td>
             {% if request.user.is_superuser %}
                   <td>
-                     <a href="{% url 'update-medicament' medicament.id %}"><button>Update Medicament</button> </a>
+                     <a href="{% url 'update-medicament' medicament.id %}"><button class = "buttonUpdate">Update Medicament</button> </a>
                   </td>
                   <td>
-                    <a href="{% url 'delete-medicament' medicament.id %}"><button>Delete Medicament</button> </a>
+                    <a href="{% url 'delete-medicament' medicament.id %}"><button class = "buttonDelete">Delete Medicament</button> </a>
                   </td>
             {% endif %}
         </tr>
@@ -56,6 +56,10 @@
 </table>
 </div>
     {% if request.user.is_superuser %}
-        <a href="{% url 'create-medicament' %}"><button>Adauga Medicament</button> </a>
+        <a href="{% url 'create-medicament' %}">
+            <button class="buttonAdd">
+                Creeaza Medicament
+            </button>
+        </a>
     {% endif %}
 {% endblock %}

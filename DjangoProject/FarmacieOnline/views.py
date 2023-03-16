@@ -184,6 +184,7 @@ def pageTranzactii(request):
     else:
         ' '
     context = {
+        'id': request.user.id,  # id ul userului care face cererea, cel logat in mod curent
         'tranzactii': tranzactii
     }
     return render(request, 'tranzactii.html', context)

@@ -14,9 +14,9 @@
     <meta charset="UTF-8">
     <h1>Farmacie Raul</h1>
     <div>
-        <ul style="display: block;">
-            <li style="float:left"><p class="button" style="display: block">STATUS:</p></li>
-            <li style="float: left;display: block">
+        <ul style="display: flex;">
+            <li><p class="button" style="display: block">STATUS:</p></li>
+            <li>
                 <p class = "button">
                     {% if request.user.is_superuser %}
                         ADMIN
@@ -29,6 +29,7 @@
             </li>
         </ul>
      </div>
+<div>
 <div class="home-container" style="bottom:20px">
     <div style="display: block; bottom: 20px">
         <hr>
@@ -51,6 +52,7 @@
             </tr>
         </table>
     </div>
+</div>
 </div>
         {% comment %}
     {% for medicament in meds %}

@@ -46,10 +46,10 @@
             </td>
             {% if request.user.is_superuser %}
                   <td>
-                     <a href="{% url 'update-client' user.id %}"><button>Update Client</button> </a>
+                     <a href="{% url 'update-client' user.id %}"><button class = "buttonUpdate">Update Client</button> </a>
                   </td>
                   <td>
-                     <a href="{% url 'delete-client' user.id %}"><button>Delete client</button> </a>
+                     <a href="{% url 'delete-client' user.id %}"><button class = buttonDelete>Delete client</button> </a>
                   </td>
             {% endif %}
         </tr>
@@ -57,6 +57,6 @@
 </table>
 </div>
     {% if request.user.is_superuser %}
-        <a href="{% url 'create-client' %}"><button>Adauga Client</button></a>
+        <a href="{% url 'create-client' %}"><button class = "buttonAdd">Adauga Client</button></a>
     {% endif %}
 {% endblock %}

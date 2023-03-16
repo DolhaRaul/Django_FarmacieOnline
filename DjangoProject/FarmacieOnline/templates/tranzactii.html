@@ -2,9 +2,15 @@
 {% load static %}
  {% block css %}
             <link rel="stylesheet" href="{% static 'medicamentePage.css' %}">
-     {% endblock %}
+ {% endblock %}
 {% block content %}
-    <span><strong>Tranzactii pentru user ul logat acum: {{ request.user.username }}</strong> </span>
+    <span>
+        {% if request.user.is_authenticated %}
+            <strong>Tranzactii pentru user ul logat acum: {{ request.user.username }}</strong>
+        {% else %}
+            <strong>Vizitatotii nu dispun de liste e tranzactii!</strong>
+        {% endif %}
+    </span>
 
 <ul id = "parent">
     <li class="child">
@@ -37,16 +43,17 @@
             <td>{{ tranzactie.numar_bucati }}</td>
             <td>{{ tranzactie.data_tranzactie }}</td>
             <td>
-                 <a href="{% url 'update-tranzactie' tranzactie.id %}"><button>Update tranzactie</button></a>
+                 <a href="{% url 'update-tranzactie' tranzactie.id %}"><button class = buttonUpdate>Update tranzactie</button></a>
             </td>
             <td>
-                 <a href="{% url 'delete-tranzactie' tranzactie.id %}"><button>Delete tranzactie</button></a>
+                 <a href="{% url 'delete-tranzactie' tranzactie.id %}"><button class = "buttonDelete">Delete tranzactie</button></a>
             </td>
         </tr>
     {% endfor %}
 </table>
 </div>
-    <div>
-        <a href="{% url 'create-tranzactie' request.user.id %}"><button size="large">Creeaza tranzactie</button> </a>
-    </div>
+    {% if request.user.is_authenticated %}
+          <a href="{% url 'create-tranzactie' id %}"><button class="buttonAdd">Creaaza tranzactie</button></a>
+            {# Doar user ii pot avea lista de tranzactii; VIZITATOTII NU!!! #}
+    {% endif %}
 {% endblock %}
