@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 {% load static %}
  {% block css %}
-            <link rel="stylesheet" href="{% static 'medicamentePage.css' %}">
+            <link rel="stylesheet" href="{% static 'ItemsPage.css' %}">
      {% endblock %}
 {% block content %}
     <span><strong>Clienti disponibili</strong> </span>
@@ -57,6 +57,6 @@
 </table>
 </div>
     {% if request.user.is_superuser %}
-        <a href="{% url 'create-client' %}"><button class = "buttonAdd">Adauga Client</button></a>
+        <a style="font-size:30px" href="{% url 'create-client' %}"><button class = "buttonAdd">Adauga Client</button></a>
     {% endif %}
 {% endblock %}

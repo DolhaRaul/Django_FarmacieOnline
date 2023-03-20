@@ -69,13 +69,21 @@ def home(request):
 
 
 def pageMedicamente(request):
-    q = request.GET.get('q') if request.GET.get('q') != None else ' '
-    medicamente = Medicament.objects.all().values()
-    if request.GET.get('q') != None:
+    medicamente = Medicament.objects.all().values() #toate medicamentele initiale
+    q = request.GET.get('q')
+    if q != None: #Avem selectata optiune de filtrare
         medicamente = Medicament.objects.filter(Q(nume__contains=q) |
                                                 Q(producator__contains=q)).values()
     else:
         ''
+    if request.method == "POST":
+        display_type = request.POST.get("display_type", None)
+        if display_type == "nume":
+            medicamente = medicamente.order_by('nume')
+        if display_type == 'pret':
+            medicamente = medicamente.order_by('pret')
+        if display_type == 'producator':
+            medicamente = medicamente.order_by('producator')
     context = {
         'medicamente': medicamente
     }

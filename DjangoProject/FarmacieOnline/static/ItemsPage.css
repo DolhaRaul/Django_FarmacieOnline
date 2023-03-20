@@ -1,5 +1,8 @@
 body{
     background-color: crimson;
+    background-image: url("Luminous_design_Django.jpg");
+    background-attachment: fixed;
+    background-size: cover;
 }
 table, th, td {
     border: 3px solid black;
@@ -31,10 +34,12 @@ h1{
     text-underline: black;
 }
 #parent
-{ white-space: nowrap;
+{
+    white-space: nowrap;
 }
 .child{
     display: inline-block;
+    font-size:26px;
 }
 .buttonAdd{
     text-align: center;

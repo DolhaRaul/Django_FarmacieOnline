@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 {% load static %}
  {% block css %}
-            <link rel="stylesheet" href="{% static 'medicamentePage.css' %}">
+            <link rel="stylesheet" href="{% static 'ItemsPage.css' %}">
      {% endblock %}
 {% block content %}
     <span><strong>Medicamente disponibile</strong> </span>
@@ -9,13 +9,29 @@
 <ul id = "parent">
     <li class="child">
     <form class="child" method="GET" action="" title="Filtreaza medicamentele ce contin textul introdus...">
+        {% csrf_token %}
         <input type="text" name="q" placeholder="Cauta medicamente...">
     </form>
     </li>
     <li class="child">
          <form class="child" action="{% url 'medicamente' %}">
+             {% csrf_token %}
          <button type="submit">Refresh</button>
          </form>
+    </li>
+    <li class="child">
+        <form method="POST" action="" title = "Sorteaza medicamentele dupa...">
+            {% csrf_token %}
+            <button onclick="">Sorteaza dupa optiune dorita</button>
+{#                    <select name="sort">#}
+{#                        <option value="nume">Nume</option>#}
+{#                        <option value="pret">Pret</option>#}
+{#                        <option value="producator">Producator</option>#}
+{#                    </select>#}
+           <label for="1"><input type="radio" name="display_type" value="nume" id="1">Nume</label>
+           <label for="2"><input type="radio" name="display_type" value="pret" id="2"> Pret</label>
+           <label for="3"><input type="radio" name="display_type" value="producator" id="3"> Producator </label>
+        </form>
     </li>
 </ul>
 
@@ -56,7 +72,7 @@
 </table>
 </div>
     {% if request.user.is_superuser %}
-        <a href="{% url 'create-medicament' %}">
+        <a style="font-size:30px"  href="{% url 'create-medicament' %}">
             <button class="buttonAdd">
                 Creeaza Medicament
             </button>
