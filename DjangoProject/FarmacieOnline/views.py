@@ -73,16 +73,15 @@ def pageMedicamente(request):
     q = request.GET.get('q')
     if q != None: #Avem selectata optiune de filtrare
         medicamente = Medicament.objects.filter(Q(nume__contains=q) |
-                                                Q(producator__contains=q)).values()
-    else:
-        ''
-    if request.method == "POST":
-        display_type = request.POST.get("display_type", None)
+                                                Q(producator__contains=q))\
+
+    display_type = request.GET.get("display_type")
+    if display_type != None:
         if display_type == "nume":
             medicamente = medicamente.order_by('nume')
-        if display_type == 'pret':
+        elif display_type == 'pret':
             medicamente = medicamente.order_by('pret')
-        if display_type == 'producator':
+        elif display_type == 'producator':
             medicamente = medicamente.order_by('producator')
     context = {
         'medicamente': medicamente
@@ -138,12 +137,19 @@ def deleteMedicament(request, pk):
 
 def pageClienti(request):
     clienti = User.objects.all().values()
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    q = request.GET.get('q')
     if q != None:
         clienti = User.objects.filter(Q(first_name__contains=q) |
                                       Q(last_name__contains=q) |
                                       Q(email__contains=q))
-
+    sort = request.GET.get("display_type")
+    if sort != None:
+        if sort == 'nume':
+            clienti = clienti.order_by('first_name')
+        if sort == 'prenume':
+            clienti = clienti.order_by('last_name')
+        if sort == 'email':
+            clienti = clienti.order_by('email')
     context = {
         'clienti': clienti
     }
@@ -184,13 +190,20 @@ def deleteClient(request, pk):
 
 
 def pageTranzactii(request):
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    q = request.GET.get('q')
     tranzactii = Tranzactie.objects.filter(client=request.user.pk)  # tranzactiile utilizatorului curent
     if q is not None:
         tranzactii = tranzactii.filter(Q(client__username__contains=q) |
                                        Q(medicament__nume__contains=q))
-    else:
-        ' '
+
+    sort_tranzactii = request.GET.get('sort')
+    if sort_tranzactii != None: #Avem selectata o optiune de sortare
+        if sort_tranzactii == 'nume':
+            tranzactii = tranzactii.order_by('medicament__nume')
+        if sort_tranzactii == 'cantitate':
+            tranzactii = tranzactii.order_by('numar_bucati')
+        if sort_tranzactii == 'data':
+            tranzactii = tranzactii.order_by('data_tranzactie')
     context = {
         'id': request.user.id,  # id ul userului care face cererea, cel logat in mod curent
         'tranzactii': tranzactii

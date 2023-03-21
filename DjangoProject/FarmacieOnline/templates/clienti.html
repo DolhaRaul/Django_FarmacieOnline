@@ -13,9 +13,21 @@
     </form>
     </li>
     <li class="child">
-         <form class="child" action="{% url 'clienti' %}">
-         <button type="submit">Refresh</button>
+         <form class="child" method = "GET">
+             {% csrf_token %}
+             <button type="submit">Refresh</button>
          </form>
+    </li>
+    <li class = "child">
+        <form method="GET" title="Sorteaza clientii dupa..."  >
+            {% csrf_token %}
+            <button type="submit">Sorteaza dupa optiune dorita</button>
+                    <select name="display_type">
+                        <option value="nume">Nume</option>
+                        <option value="pret">Pret</option>
+                        <option value="email">Email</option>
+                    </select>
+        </form>
     </li>
 </ul>
 

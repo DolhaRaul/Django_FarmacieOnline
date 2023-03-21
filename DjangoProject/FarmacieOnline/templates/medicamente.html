@@ -20,17 +20,17 @@
          </form>
     </li>
     <li class="child">
-        <form method="POST" action="" title = "Sorteaza medicamentele dupa...">
+        <form method="GET" title="Sorteaza medicamentele dupa..."  >
             {% csrf_token %}
-            <button onclick="">Sorteaza dupa optiune dorita</button>
-{#                    <select name="sort">#}
-{#                        <option value="nume">Nume</option>#}
-{#                        <option value="pret">Pret</option>#}
-{#                        <option value="producator">Producator</option>#}
-{#                    </select>#}
-           <label for="1"><input type="radio" name="display_type" value="nume" id="1">Nume</label>
-           <label for="2"><input type="radio" name="display_type" value="pret" id="2"> Pret</label>
-           <label for="3"><input type="radio" name="display_type" value="producator" id="3"> Producator </label>
+            <button type="submit">Sorteaza dupa optiune dorita</button>
+                    <select name="display_type">
+                        <option value="nume">Nume</option>
+                        <option value="pret">Pret</option>
+                        <option value="producator">Producator</option>
+                    </select>
+{#           <label for="1"><input type="radio" name="display_type" value="nume" id="1">Nume</label>#}
+{#           <label for="2"><input type="radio" name="display_type" value="pret" id="2"> Pret</label>#}
+{#           <label for="3"><input type="radio" name="display_type" value="producator" id="3"> Producator </label>#}
         </form>
     </li>
 </ul>
@@ -71,11 +71,12 @@
     {% endfor %}
 </table>
 </div>
-    {% if request.user.is_superuser %}
-        <a style="font-size:30px"  href="{% url 'create-medicament' %}">
-            <button class="buttonAdd">
-                Creeaza Medicament
-            </button>
-        </a>
-    {% endif %}
+{% if request.user.is_superuser %}
+    <a style="font-size:30px"  href="{% url 'create-medicament' %}">
+        <button class="buttonAdd">
+            Creeaza Medicament
+        </button>
+    </a>
+{% endif %}
+
 {% endblock %}
