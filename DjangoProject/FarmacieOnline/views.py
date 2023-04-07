@@ -83,6 +83,16 @@ def pageMedicamente(request):
             medicamente = medicamente.order_by('pret')
         elif display_type == 'producator':
             medicamente = medicamente.order_by('producator')
+
+    display_order = request.GET.get("display_order")
+    if display_order != None: #Am ales daca vrem sa sortam crescator sau descrescator
+        if display_type == None:
+            messages.add_message(request, "PRECIZATI SI CRITERIUL DUPA CARE SA SE FACA SORTAREA!")
+        else:
+            if display_order == 'asc': #trebuie sortate crescator
+                pass #Asa se sorteaza implicit
+            else:
+                medicamente = reversed(medicamente)
     context = {
         'medicamente': medicamente
     }
@@ -136,7 +146,7 @@ def deleteMedicament(request, pk):
 
 
 def pageClienti(request):
-    clienti = User.objects.all().values()
+    clienti = User.objects.all().values().order_by('first_name')
     q = request.GET.get('q')
     if q != None:
         clienti = User.objects.filter(Q(first_name__contains=q) |
@@ -150,6 +160,16 @@ def pageClienti(request):
             clienti = clienti.order_by('last_name')
         if sort == 'email':
             clienti = clienti.order_by('email')
+
+    display_order = request.GET.get('display_order')
+    if display_order != None:
+        if sort == None:
+            messages.error("PRECIZATI SI CRITERIUL DUPA CARE SE FACE SORTAREA, CRESCATOR SAU DESCRESCATOR!")
+        else:
+            if display_order == 'asc':
+                pass
+            else:
+                clienti = reversed(clienti)
     context = {
         'clienti': clienti
     }
@@ -204,6 +224,15 @@ def pageTranzactii(request):
             tranzactii = tranzactii.order_by('numar_bucati')
         if sort_tranzactii == 'data':
             tranzactii = tranzactii.order_by('data_tranzactie')
+    display_order = request.GET.get('display_order') #Obtinem valoarea din HTML itemul cu name ul aociat 'display_order'
+    if display_order != None: #Avem asociat un criteriu de sortare
+        if sort_tranzactii == None:
+            messages.error(request, "PRECIZATI CRITERIUL DUPA CARE SA SE FACA SORTAREA, CRESCATOR SAU DESCRESCATOR!")
+        else:
+            if display_order == 'asc': #daca am selectat optiunea ce are asociat name-ul 'asc'
+                pass #implicit, sortarea e crescatoare
+            else:
+                tranzactii = reversed(tranzactii)
     context = {
         'id': request.user.id,  # id ul userului care face cererea, cel logat in mod curent
         'tranzactii': tranzactii

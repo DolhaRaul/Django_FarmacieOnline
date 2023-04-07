@@ -15,7 +15,7 @@
 <ul id = "parent">
     <li class="child">
     <form class="child" method="GET" action="" title="Filtreaza tranzactiile ce contin textul introdus...">
-        <input type="text" name="q" placeholder="Cauta tranzactii...">
+        <input type="search" name="q" placeholder="Cauta tranzactii...">
     </form>
     </li>
     <li class="child">
@@ -31,6 +31,10 @@
                         <option value="nume">Nume</option>
                         <option value="cantitate">Cantitate</option>
                         <option value="data">Data</option>
+                    </select>
+                    <select name="display_order">
+                        <option value="asc">Crescator</option>
+                        <option value="des">Descrescator</option>
                     </select>
         </form>
     </li>

@@ -10,7 +10,7 @@
     <li class="child">
     <form class="child" method="GET" action="" title="Filtreaza medicamentele ce contin textul introdus...">
         {% csrf_token %}
-        <input type="text" name="q" placeholder="Cauta medicamente...">
+        <input type="search" name="q" placeholder="Cauta medicamente...">
     </form>
     </li>
     <li class="child">
@@ -27,6 +27,10 @@
                         <option value="nume">Nume</option>
                         <option value="pret">Pret</option>
                         <option value="producator">Producator</option>
+                    </select>
+                    <select name="display_order">
+                        <option value="asc">Crescator</option>
+                        <option value="des">Descrescator</option>
                     </select>
 {#           <label for="1"><input type="radio" name="display_type" value="nume" id="1">Nume</label>#}
 {#           <label for="2"><input type="radio" name="display_type" value="pret" id="2"> Pret</label>#}

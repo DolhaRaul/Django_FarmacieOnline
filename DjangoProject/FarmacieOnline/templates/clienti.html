@@ -9,7 +9,7 @@
 <ul id = "parent">
     <li class="child">
     <form class="child" method="GET" action="" title="Filtreaza clientii ce contin textul introdus...">
-        <input type="text" name="q" placeholder="Cauta clienti...">
+        <input type="search" name="q" placeholder="Cauta clienti...">
     </form>
     </li>
     <li class="child">
@@ -24,8 +24,12 @@
             <button type="submit">Sorteaza dupa optiune dorita</button>
                     <select name="display_type">
                         <option value="nume">Nume</option>
-                        <option value="pret">Pret</option>
+                        <option value="prenume">Prenume</option>
                         <option value="email">Email</option>
+                    </select>
+                    <select name="display_order">
+                        <option value="asc">Crescator</option>
+                        <option value="des">Descrescator</option>
                     </select>
         </form>
     </li>
