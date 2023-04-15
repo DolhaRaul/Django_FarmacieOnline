@@ -1,71 +1,55 @@
 {% load static %}
-   <link rel="stylesheet" href="{% static 'arrow.css' %}">
-<style>
-   .footer{
-       resize: both;
-       position: relative;
-       text-align: Left;
-       bottom:0px;
-       margin-bottom:25px;
-       margin-top: auto;
-       border:5px;
-   }
-   #thisSpan{
-       font-size:40px;
-       margin:3px;
-   }
-   #Login{
-       font-family: Verdana, sans-serif;
-       font-size: 40px;
-   }
-   #Logout{
-       font-family: Verdana, sans-serif;
-       font-size: 40px;
-   }
-   .buttonLogin{
-       transition-duration: 0.3s;
-   }
-    .buttonLogin:hover{
-       background-color: #5dbea3;
-   }
-   .buttonLogout
-   {
-       transition-duration: 0.3s;
-   }
-   .buttonLogout:hover
-   {
-        background-color: #e90600;
-   }
 
-</style>
-<div>
-        <span id = "thisSpan">
-            <a id = "thisSpan" href = '/' title="Go back to the starting page of this web site!">
-                Go back to the Main Page!
-            </a>
-        </span>
-</div>
-{% if request.user.is_authenticated %}
-    <div style="position: relative">
-    <a id = "Logout" href="{% url 'logout' %}"><button class = "buttonLogout" style="margin:3px;text-align: left">Logout!</button></a>
-    <ul class="arrow">
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'arrow.css' %}">
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+{% endblock %}
+
+{#{% if request.user.is_authenticated %}#}
+{#    <div style="position: relative">#}
+{#    <a id = "Logout" href="{% url 'logout' %}"><button class = "buttonLogout" style="margin:3px;text-align: left">Logout!</button></a>#}
+{#    <ul class="arrow">#}
+{#        <li></li>#}
+{#        <li></li>#}
+{#        <li></li>#}
+{#    </ul>#}
+{#    </div>#}
+{#    {% comment %}<a id = "Logout" href="{% url 'logout' %}"><button class = "buttonLogout" style="margin:3px;text-align: left">Logout!</button></a>#}
+{#    {% endcomment %}#}
+{#{% else %}#}
+{#     <div style="position: relative">#}
+{#        <a id = "Login" href="{% url 'login' %}"><button class = "buttonLogin" style="margin:3px;text-align: left">Login!</button></a>#}
+{#        <ul class="arrow">#}
+{#            <li></li>#}
+{#            <li></li>#}
+{#            <li></li>#}
+{#        </ul>#}
+{#    </div>#}
+{#{% endif %}#}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Farmacie</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        <a class="nav-link" href="{% url 'medicamente' %}">Medicamente</a>
+        <a class="nav-link" href="{% url 'clienti' %}">Clienti</a>
+        <a class="nav-link" href="{% url 'tranzactii' %}">Tranzactii</a>
+        {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </div>
     </div>
-    {% comment %}<a id = "Logout" href="{% url 'logout' %}"><button class = "buttonLogout" style="margin:3px;text-align: left">Logout!</button></a>
-    {% endcomment %}
-{% else %}
-     <div style="position: relative">
-    <a id = "Login" href="{% url 'login' %}"><button class = "buttonLogin" style="margin:3px;text-align: left">Login!</button></a>
-    <ul class="arrow">
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    </div>
-{% endif %}
+  </div>
+</nav>
+
+</nav>
 
 
 <!-- DEFINIM o linie separatoare intre aceasta referinta si restul paginii HTML!-->

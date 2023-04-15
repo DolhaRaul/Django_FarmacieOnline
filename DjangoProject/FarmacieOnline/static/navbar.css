@@ -1,0 +1,46 @@
+.footer{
+   resize: both;
+   position: relative;
+   text-align: Left;
+   bottom:0px;
+   margin-bottom:25px;
+   margin-top: auto;
+   border:5px;
+}
+
+#link-back{
+   font-size:40px;
+   margin:3px;
+}
+
+#Login{
+   font-family: Verdana, sans-serif;
+   font-size: 40px;
+}
+
+#Logout{
+   font-family: Verdana, sans-serif;
+   font-size: 40px;
+}
+
+.buttonLogin{
+   transition-duration: 0.3s;
+}
+
+.buttonLogin:hover{
+   background-color: #5dbea3;
+}
+
+.buttonLogout
+{
+   transition-duration: 0.3s;
+}
+
+.buttonLogout:hover
+{
+    background-color: #e90600;
+}
+nav{
+   border-style: outset;
+   mso-border-shadow: yes;
+}

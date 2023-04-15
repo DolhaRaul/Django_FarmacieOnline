@@ -49,7 +49,7 @@ tr{
     width: 100vw;
     height: 100vh;
 }
-.button{
+.button-status{
     transition-duration:0.3s;
     background-color: white;
     border: 2px solid black;
@@ -61,7 +61,7 @@ tr{
     /*left: 20px;*/
     /*top:30px*/
 }
-.button:hover{
+.button-status:hover{
     background-color: lightpink;
     float: left;
 }
@@ -76,7 +76,9 @@ li{
     margin-bottom:10px;
     top:30px
 }
-
+hr{
+    border: 2px solid black;
+}
 a:link, a:active, a:visited{
     color: black;
 }

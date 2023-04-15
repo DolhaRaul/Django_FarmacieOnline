@@ -16,10 +16,10 @@
     <h1>Farmacie Raul</h1>
     <div>
         <ul style="display: flex;">
-            <li><p class="button" style="display: block">STATUS</p></li>
-            <li><span class="button">:</span></li>
+            <li><p class="button-status" style="display: block">STATUS</p></li>
+            <li><span class="button-status">:</span></li>
             <li>
-                <p class = "button">
+                <p class = "button-status">
                     {% if request.user.is_superuser %}
                         ADMIN
                     {% elif request.user.is_authenticated %}

@@ -1,9 +1,6 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse
-from .models import Medicament, Tranzactie
-from .models import User
-from .forms import MedicamentForm, UserForm, TranzactieForm
 from django.contrib import messages  # Le folosim pentru a arunca erori, etc
 from django.contrib.auth.decorators import login_required  # Le folosim pentru a arunca erori, etc
 from django.contrib.auth.forms import UserCreationForm
@@ -11,6 +8,10 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, \
     logout  # Pt login, logoout useri; metode deja implmenetate de Django
 
+from .models import Medicament, Tranzactie
+from .models import User
+from .forms import MedicamentForm, UserForm, TranzactieForm
+from django.db import models
 
 def loginPage(request):
     page = 'login'
@@ -40,9 +41,9 @@ def logoutUser(request):
 
 def registerUser(request):
     page='register'
-    form = UserCreationForm()#Formularul initial, cu datele(in inputuri) necompletate
+    form = UserForm() #Formularul initial, cu datele(in inputuri) necompletate
     if request.method == "POST":
-        form = UserCreationForm(request.POST)  # NOUL FORMULAR, CU DATELE(din input) completate
+        form = UserForm(request.POST)  # NOUL FORMULAR, CU DATELE(din input) completate
         if form.is_valid():
             user = form.save(commit=False) #Daca vreau eventual sa fac validari
             user.save()
